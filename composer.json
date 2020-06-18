@@ -1,16 +1,21 @@
 {
-    "name": "sylius/plugin-skeleton",
+    "name": "bitbag/shipping-subscription-plugin",
     "type": "sylius-plugin",
-    "keywords": ["sylius", "sylius-plugin"],
-    "description": "Acme example plugin for Sylius.",
+    "keywords": [
+        "sylius",
+        "sylius-plugin"
+    ],
+    "description": "Free shipping subscription plugin for Sylius applications.",
     "license": "MIT",
     "require": {
         "php": "^7.3",
-
-        "sylius/sylius": "^1.7.5"
+        "sylius/sylius": "^1.7"
     },
     "require-dev": {
-        "behat/behat": "^3.6.1",
+        "behat/behat": "^3.6",
+        "behat/mink": "^1.7",
+        "behat/mink-browserkit-driver": "^1.3",
+        "behat/mink-extension": "^2.2",
         "behat/mink-selenium2-driver": "^1.4",
         "dmore/behat-chrome-extension": "^1.3",
         "dmore/chrome-mink-driver": "^2.7",
@@ -36,18 +41,21 @@
         "symfony/web-profiler-bundle": "^4.4|^5.0",
         "symfony/web-server-bundle": "^4.4|^5.0"
     },
+    "conflict": {
+        "symfony/symfony": "4.1.8",
+        "symfony/browser-kit": "4.1.8",
+        "symfony/dependency-injection": "4.1.8",
+        "symfony/dom-crawler": "4.1.8",
+        "symfony/routing": "4.1.8"
+    },
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Acme\\SyliusExamplePlugin\\": "src/",
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+            "BitBag\\SyliusShippingSubscriptionPlugin\\\\": "src/",
+            "Tests\\BitBag\\SyliusShippingSubscriptionPlugin\\": "tests/"
         }
     },
     "autoload-dev": {
         "classmap": ["tests/Application/Kernel.php"]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.7-dev"
-        }
     }
 }
