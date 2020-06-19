@@ -1,0 +1,8 @@
+winzou_state_machine:
+    sylius_order:
+        callbacks:
+            after:
+                bitbag_order_cancellation_shipping_subscription:
+                    on: ["cancel"]
+                    do: ["@bitbag_sylius_shipping_subscritption.operator.shipping_subscription", "disable"]
+                    args: ["object"]

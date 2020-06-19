@@ -51,7 +51,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "BitBag\\SyliusShippingSubscriptionPlugin\\\\": "src/",
+            "BitBag\\SyliusShippingSubscriptionPlugin\\": "src/",
             "Tests\\BitBag\\SyliusShippingSubscriptionPlugin\\": "tests/"
         }
     },

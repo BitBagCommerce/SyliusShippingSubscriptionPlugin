@@ -1,0 +1,33 @@
+<doctrine-mapping xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <mapped-superclass name="BitBag\SyliusShippingSubscriptionPlugin\Model\ShippingSubscription" table="bitbag_shipping_subscription">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="code" unique="true"/>
+        <field name="enabled" type="boolean"/>
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+        <many-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface">
+            <join-column name="customer_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
+        </many-to-one>
+
+        <many-to-one field="channel" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <join-column name="channel_id" referenced-column-name="id" nullable="false"/>
+        </many-to-one>
+
+        <many-to-one field="orderItemUnit" target-entity="Sylius\Component\Order\Model\OrderItemUnitInterface">
+            <join-column name="order_item_unit_id" referenced-column-name="id" on-delete="SET NULL"/>
+        </many-to-one>
+
+    </mapped-superclass>
+
+</doctrine-mapping>

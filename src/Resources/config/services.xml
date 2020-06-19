@@ -2,6 +2,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <!-- Put your services here -->
+
+
+
+        <service id="bitbag.sylius_shipping_subscription_plugin.form.extension.product_type_extension"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ProductTypeExtension" >
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
+        </service>
     </services>
 </container>

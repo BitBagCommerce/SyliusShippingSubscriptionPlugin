@@ -1,0 +1,8 @@
+bitbag_sylius_shipping_subscription:
+    form:
+        product:
+            shipping_subscription: Shipping subscription
+        shipping_calculator:
+            subscription_shipping_configuration:
+                amount: Minimum amount for free shipping
+    ui:

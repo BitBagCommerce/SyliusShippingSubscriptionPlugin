@@ -1,0 +1,8 @@
+winzou_state_machine:
+    sylius_order_checkout:
+        callbacks:
+            after:
+                bitbag_created_shipping_subscription:
+                    on: ["complete"]
+                    do: ["@bitbag_sylius_shipping_subscription.operator.shipping_subscription", "create"]
+                    args: ["object"]
