@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusShippingSubscriptionPlugin\Operator;
 
 use BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory;
-use BitBag\SyliusShippingSubscriptionPlugin\Model\ShippingSubscriptionInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionRepositoryInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusShippingSubscriptionPlugin\Model;
+namespace BitBag\SyliusShippingSubscriptionPlugin\Entity;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;

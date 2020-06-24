@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Factory;
 
-use BitBag\SyliusShippingSubscriptionPlugin\Model\ShippingSubscriptionInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;

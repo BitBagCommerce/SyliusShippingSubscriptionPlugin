@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusShippingSubscriptionPlugin\Model;
+namespace BitBag\SyliusShippingSubscriptionPlugin\Entity;
 
 trait ProductTrait
 {
