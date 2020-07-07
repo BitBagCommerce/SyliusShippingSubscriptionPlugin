@@ -4,5 +4,5 @@ winzou_state_machine:
             after:
                 bitbag_shipping_subscription_enable:
                     on: ["pay"]
-                    do: ["@setono_sylius_gift_card.operator.order_gift_card", "enable"]
+                    do: ["@bitbag_sylius_shipping_subscription.operator.shipping_subscription", "enable"]
                     args: ["object"]

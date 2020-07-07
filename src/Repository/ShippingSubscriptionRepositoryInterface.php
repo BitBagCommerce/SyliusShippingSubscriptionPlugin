@@ -6,6 +6,7 @@ namespace BitBag\SyliusShippingSubscriptionPlugin\Repository;
 
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ShippingSubscriptionRepositoryInterface
 {

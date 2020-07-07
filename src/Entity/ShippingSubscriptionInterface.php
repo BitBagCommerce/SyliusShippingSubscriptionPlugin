@@ -8,9 +8,10 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ShippingSubscriptionInterface
-{
+interface ShippingSubscriptionInterface extends ResourceInterface
+{ 
     public function getCode(): ?string;
 
     public function setCode(?string $code): void;

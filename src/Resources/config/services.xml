@@ -9,5 +9,21 @@
                  class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ProductTypeExtension" >
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
         </service>
+
+        <service id="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory"
+                 decorates="bitbag_sylius_shipping_subscription_plugin.factory.shipping_subscription"
+        >
+            <argument type="service" id="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory.inner"/>
+        </service>
+
+
+        <service id="bitbag_sylius_shipping_subscription.operator.shipping_subscription"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Operator\OrderShippingSubscriptionOperator" public="true">
+            <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.factory.shipping_subscription" />
+            <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.repository.shipping_subscription" />
+            <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.manager.shipping_subscription" />
+
+        </service>
     </services>
 </container>
