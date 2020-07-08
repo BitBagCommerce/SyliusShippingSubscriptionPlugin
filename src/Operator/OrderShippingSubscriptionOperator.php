@@ -60,7 +60,6 @@ class OrderShippingSubscriptionOperator
     {
         $shippingSubscriptions = $this->getShippingSubscriptions($order);
 
-        dump($shippingSubscriptions);
         if (count($shippingSubscriptions) === 0) {
             return;
         }
