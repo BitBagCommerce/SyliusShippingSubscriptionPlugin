@@ -33,4 +33,10 @@ interface ShippingSubscriptionInterface extends ResourceInterface
     public function getChannel(): ?ChannelInterface;
 
     public function setChannel(ChannelInterface $channel): void;
+    
+    public function setEnabled(?bool $enabled): void;
+
+    public function enable(): void;
+
+    public function disable(): void;
 }
