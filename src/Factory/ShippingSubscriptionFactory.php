@@ -52,11 +52,13 @@ class ShippingSubscriptionFactory implements \Sylius\Component\Resource\Factory\
         $customer = $order->getCustomer();
         Assert::isInstanceOf($customer, CustomerInterface::class);
 
+        /** @var ShippingSubscriptionInterface $shippingSubscription */
         $shippingSubscription = $this->createNew();
         $shippingSubscription->setCode(Uuid::uuid4()->toString());
         $shippingSubscription->setCustomer($customer);
         $shippingSubscription->setOrderItemUnit($orderItemUnit);
         $shippingSubscription->setChannel($channel);
+        $shippingSubscription->setEnabled(false);
 
         return $shippingSubscription;
     }
