@@ -57,7 +57,6 @@ class ShippingSubscriptionFactory implements \Sylius\Component\Resource\Factory\
         $shippingSubscription->setCustomer($customer);
         $shippingSubscription->setOrderItemUnit($orderItemUnit);
         $shippingSubscription->setChannel($channel);
-        $shippingSubscription->enable();
 
         return $shippingSubscription;
     }
