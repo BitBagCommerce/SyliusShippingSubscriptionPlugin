@@ -12,3 +12,5 @@ doctrine:
         charset: UTF8
 
         url: '%env(resolve:DATABASE_URL)%'
+
+
