@@ -53,7 +53,10 @@
     "autoload": {
         "psr-4": {
             "BitBag\\SyliusShippingSubscriptionPlugin\\": "src/",
-            "Tests\\BitBag\\SyliusShippingSubscriptionPlugin\\": "tests/"
+            "Tests\\BitBag\\SyliusShippingSubscriptionPlugin\\": [
+                "tests/",
+                "tests/Application/src"
+            ]
         }
     },
     "autoload-dev": {

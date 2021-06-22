@@ -16,3 +16,16 @@ parameters:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_resource:
+    resources:
+        bitbag_sylius_shipping_subscription_plugin.shipping_subscription:
+            driver: doctrine/orm
+            classes:
+                model: BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscription
+                repository: BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionRepository
+sylius_product:
+    resources:
+        product:
+            classes:
+                model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Product
