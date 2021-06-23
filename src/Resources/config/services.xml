@@ -25,5 +25,11 @@
             <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.manager.shipping_subscription" />
 
         </service>
+
+        <service id="bitbag.sylius_shipping_subscription_plugin.menu.admin_menu_listener"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Menu\AdminMenuListener" >
+            <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addSubscriptionMenu"/>
+        </service>
+
     </services>
 </container>

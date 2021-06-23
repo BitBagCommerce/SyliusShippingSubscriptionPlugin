@@ -9,6 +9,8 @@ imports:
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
 
     - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/services.xml" }
+    - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/resources.yml" }
+    - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/grids.yml" }
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'

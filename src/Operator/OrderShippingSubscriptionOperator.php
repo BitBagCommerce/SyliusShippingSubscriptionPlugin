@@ -8,11 +8,11 @@ use BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionRepositoryInterface;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Persistence\ObjectManager;
-use Setono\SyliusGiftCardPlugin\Model\ProductInterface;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 class OrderShippingSubscriptionOperator

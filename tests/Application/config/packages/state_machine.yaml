@@ -1,0 +1,24 @@
+winzou_state_machine:
+  sylius_order:
+    callbacks:
+      after:
+        bitbag_order_cancellation_shipping_subscription:
+          on: [ "cancel" ]
+          do: [ "@bitbag_sylius_shipping_subscritption.operator.shipping_subscription", "disable" ]
+          args: [ "object" ]
+
+  sylius_order_checkout:
+    callbacks:
+      after:
+        bitbag_created_shipping_subscription:
+          on: [ "complete" ]
+          do: [ "@bitbag_sylius_shipping_subscription.operator.shipping_subscription", "create" ]
+          args: [ "object" ]
+
+  sylius_order_payment:
+    callbacks:
+      after:
+        bitbag_shipping_subscription_enable:
+          on: ["pay"]
+          do: ["@bitbag_sylius_shipping_subscription.operator.shipping_subscription", "enable"]
+          args: ["object"]
