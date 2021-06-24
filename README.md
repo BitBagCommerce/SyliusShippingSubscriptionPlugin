@@ -58,15 +58,15 @@ At BitBag we do believe in open source. However, we are able to do it just becau
     # config/routes/sylius_admin.yaml
     ...
     
-   app_subscription:
-       resource: |
-           alias: bitbag.shipping_subscription
-           section: admin
-           templates: '@SyliusAdmin/Crud'
-           except: ['show']
-           grid: app_admin_subscription
-       type: sylius.resource
-       prefix: /admin
+    app_subscription:
+        resource: |
+            alias: bitbag.shipping_subscription
+            section: admin
+            templates: '@SyliusAdmin/Crud'
+            except: ['show']
+            grid: app_admin_subscription
+        type: sylius.resource
+        prefix: /admin
 
     ```
 
