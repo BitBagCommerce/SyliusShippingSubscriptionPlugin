@@ -45,19 +45,29 @@ At BitBag we do believe in open source. However, we are able to do it just becau
     
     imports:
         ...
-        
+   
         - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/services.xml" }
+        - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/resources.yml" }
+        - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/grids.yml" }
     ```    
 
-1. Import routing in your `config/routes.yaml` file:
+1. Add routing in your `config/routes/routes.yaml` file:
     
     ```yaml
     
-    # config/routes.yaml
+    # config/routes/sylius_admin.yaml
     ...
     
-    bitbag_sylius_product_bundle_plugin:
-        resource: "@BitBagSyliusProductBundlePlugin/Resources/config/routing.yml"
+   app_subscription:
+       resource: |
+           alias: bitbag.shipping_subscription
+           section: admin
+           templates: '@SyliusAdmin/Crud'
+           except: ['show']
+           grid: app_admin_subscription
+       type: sylius.resource
+       prefix: /admin
+
     ```
 
 1. Extend `Product`(including Doctrine mapping):
@@ -68,11 +78,13 @@ At BitBag we do believe in open source. However, we are able to do it just becau
     declare(strict_types=1);
     
     namespace App\Entity\Product;
-    
-    use BitBag\SyliusShippingSubscriptionPlugin\Model\ProductTrait as SubscriptionShippingProductTrait;
+   
+    use BitBag\SyliusShippingSubscriptionPlugin\Entity\ProductShippingSubscriptionAwareInterface;
+    use BitBag\SyliusShippingSubscriptionPlugin\Entity\ProductTrait as SubscriptionShippingProductTrait;
     use Sylius\Component\Core\Model\Product as BaseProduct;
+  
 
-    class Product extends BaseProduct 
+    class Product extends BaseProduct implements ProductShippingSubscriptionAwareInterface
     {
         use SubscriptionShippingProductTrait;  
     }
@@ -103,4 +115,3 @@ At BitBag we do believe in open source. However, we are able to do it just becau
     $ bin/console doctrine:migrations:diff
     $ bin/console doctrine:migrations:migrate
    ```
-   
