@@ -1,26 +1,26 @@
 sylius_grid:
-  grids:
-    app_admin_subscription:
-      driver:
-        options:
-          class: "%app.model.shipping_subscription.class%"
-      fields:
-        customer:
-          type: string
-          label: sylius.ui.customer
-        enabled:
-          type: twig
-          label: sylius.ui.enabled
+    grids:
+      app_admin_subscription:
+        driver:
           options:
-            template:
-              "@BitBagSyliusShippingSubscriptionPlugin/Grid/enabled.html.twig"
-        order_item_unit.order_item.product_name:
-          type: string
-          label: sylius.ui.product
-        created_at:
-          type: datetime
-          label: sylius.ui.from
-      actions:
-        item:
-          delete:
-            type: delete
+            class: "%bitbag.model.shipping_subscription.class%"
+        fields:
+          customer:
+            type: string
+            label: sylius.ui.customer
+          enabled:
+            type: twig
+            label: sylius.ui.enabled
+            options:
+              template:
+                "@BitBagSyliusShippingSubscriptionPlugin/Grid/enabled.html.twig"
+          order_item_unit.order_item.product_name:
+            type: string
+            label: sylius.ui.product
+          created_at:
+            type: datetime
+            label: sylius.ui.from
+        actions:
+          item:
+            delete:
+              type: delete

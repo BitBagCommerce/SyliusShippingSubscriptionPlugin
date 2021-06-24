@@ -30,4 +30,4 @@ sylius_product:
     resources:
         product:
             classes:
-                model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Product
+                model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Product\Product

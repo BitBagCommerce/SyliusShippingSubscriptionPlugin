@@ -5,7 +5,10 @@ bitbag_sylius_shipping_subscription:
         shipping_calculator:
             subscription_shipping_configuration:
                 amount: Minimum amount for free shipping
-app:
+    grid:
+        enabled: 'Enabled'
+        disaled: 'Disabled'
+bitbag:
     ui:
         shipping_subscriptions:
             'Shipping subscriptions'

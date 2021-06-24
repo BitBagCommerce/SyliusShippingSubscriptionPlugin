@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Menu;
 
+use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 final class AdminMenuListener
 {
     public function addSubscriptionMenu(MenuBuilderEvent $event): void
     {
-        $configurationMenu = $event->getMenu()->getChild('sales');
-        $configurationMenu
-            ->addChild('Subscriptions', ['route' => 'app_admin_shipping_subscription_index'])
-            ->setLabel('app.ui.shipping_subscriptions')
-            ->setLabelAttribute('icon', 'redo alternate');
+        $menu = $event->getMenu();
+
+        /** @var ItemInterface $salesMenu */
+        $salesMenu = $menu->getChild('sales');
+
+        $salesMenu->addChild('Subscriptions', ['route' => 'bitbag_admin_shipping_subscription_index'])
+            ->setLabel('bitbag.ui.shipping_subscriptions')
+            ->setLabelAttribute('icon', 'redo alternate')
+        ;
 
     }
 }

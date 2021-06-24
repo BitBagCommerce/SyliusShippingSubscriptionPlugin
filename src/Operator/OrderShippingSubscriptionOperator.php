@@ -12,8 +12,8 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Product\Model\ProductInterface;
-use Webmozart\Assert\Assert;
+use Sylius\Component\Core\Model\ProductInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Entity\ProductShippingSubscriptionAwareInterface;
 
 class OrderShippingSubscriptionOperator
 {
@@ -95,7 +95,9 @@ class OrderShippingSubscriptionOperator
             /** @var ProductInterface|null $product */
             $product = $item->getProduct();
 
-            Assert::isInstanceOf($product, ProductInterface::class);
+            if(!$product instanceof ProductShippingSubscriptionAwareInterface){
+                return false;
+            }
 
             return $product->isShippingSubscription();
         });

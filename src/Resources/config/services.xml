@@ -6,14 +6,13 @@
 
 
         <service id="bitbag.sylius_shipping_subscription_plugin.form.extension.product_type_extension"
-                 class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ProductTypeExtension" >
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ProductTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
         </service>
 
         <service id="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory"
                  class="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory"
-                 decorates="bitbag_sylius_shipping_subscription_plugin.factory.shipping_subscription"
-        >
+                 decorates="bitbag_sylius_shipping_subscription_plugin.factory.shipping_subscription">
             <argument type="service" id="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory.inner"/>
         </service>
 
@@ -27,7 +26,7 @@
         </service>
 
         <service id="bitbag.sylius_shipping_subscription_plugin.menu.admin_menu_listener"
-                 class="BitBag\SyliusShippingSubscriptionPlugin\Menu\AdminMenuListener" >
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Menu\AdminMenuListener">
             <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addSubscriptionMenu"/>
         </service>
 

@@ -1,5 +1,5 @@
 sylius_resource:
-  resources:
-    app.shipping_subscription:
-      classes:
-        model: BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscription
+    resources:
+      bitbag.shipping_subscription:
+        classes:
+          model: BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscription
