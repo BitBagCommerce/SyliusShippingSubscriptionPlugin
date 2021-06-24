@@ -14,6 +14,9 @@ sylius_grid:
           options:
             template:
               "@BitBagSyliusShippingSubscriptionPlugin/Grid/enabled.html.twig"
+        order_item_unit.order_item.product_name:
+          type: string
+          label: sylius.ui.product
         created_at:
           type: datetime
           label: sylius.ui.from
