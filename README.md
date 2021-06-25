@@ -60,7 +60,7 @@ At BitBag we do believe in open source. However, we are able to do it just becau
     
     app_subscription:
         resource: |
-            alias: bitbag.shipping_subscription
+            alias: bitbag_sylius_shipping_subscription_plugin.shipping_subscription
             section: admin
             templates: '@SyliusAdmin/Crud'
             except: ['show']
