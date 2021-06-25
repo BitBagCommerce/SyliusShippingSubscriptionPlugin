@@ -16,7 +16,7 @@ final class AdminMenuListener
         /** @var ItemInterface $salesMenu */
         $salesMenu = $menu->getChild('sales');
 
-        $salesMenu->addChild('Subscriptions', ['route' => 'bitbag_admin_shipping_subscription_index'])
+        $salesMenu->addChild('Subscriptions', ['route' => 'bitbag_sylius_shipping_subscription_plugin_admin_shipping_subscription_index'])
             ->setLabel('bitbag.ui.shipping_subscriptions')
             ->setLabelAttribute('icon', 'redo alternate')
         ;

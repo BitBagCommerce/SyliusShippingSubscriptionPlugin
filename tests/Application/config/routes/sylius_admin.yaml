@@ -4,7 +4,7 @@ sylius_admin:
 
 app_subscription:
     resource: |
-        alias: bitbag.shipping_subscription
+        alias: bitbag_sylius_shipping_subscription_plugin.shipping_subscription
         section: admin
         templates: '@SyliusAdmin/Crud'
         except: ['show']

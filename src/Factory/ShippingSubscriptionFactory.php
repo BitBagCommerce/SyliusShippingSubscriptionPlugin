@@ -13,7 +13,7 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-class ShippingSubscriptionFactory implements \Sylius\Component\Resource\Factory\FactoryInterface
+class ShippingSubscriptionFactory implements FactoryInterface
 {
     /** @var FactoryInterface */
     private $decoratedFactory;

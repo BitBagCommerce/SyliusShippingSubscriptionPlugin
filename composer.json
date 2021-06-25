@@ -8,8 +8,8 @@
     "description": "Free shipping subscription plugin for Sylius applications.",
     "license": "MIT",
     "require": {
-        "php": "^7.4",
-        "sylius/sylius": "^1.8 || ~1.9.0"
+        "php": "^7.3",
+        "sylius/sylius": "~1.8 || ~1.9.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -43,11 +43,6 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.9-dev"
-        }
     },
     "conflict": {
         "symfony/symfony": "4.1.8",
