@@ -30,5 +30,16 @@
             <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addSubscriptionMenu"/>
         </service>
 
+        <service id="bitbag.sylius_shipping_subscription_plugin.type.shipping_method"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ShippingMethodTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" />
+        </service>
+
+        <service class="BitBag\SyliusShippingSubscriptionPlugin\Checker\Eligibility\ShippingSubscriptionEligibilityChecker"
+                 id="bitbag.sylius_shipping_subscription_plugin.checker.eligibility.shipping_subscription_eligibility_checker">
+            <tag name="sylius.shipping_method_eligibility_checker"/>
+        </service>
+
+
     </services>
 </container>

@@ -15,7 +15,7 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ProductShippingSubscriptionAwareInterface;
 
-class OrderShippingSubscriptionOperator
+final class OrderShippingSubscriptionOperator
 {
     /** @var ShippingSubscriptionFactory */
     private $shippingSubscriptionFactory;
@@ -65,6 +65,10 @@ class OrderShippingSubscriptionOperator
         }
 
         foreach ($shippingSubscriptions as $shippingSubscription) {
+            $length = new \DateTime('now');
+            $length->modify("+1 year");
+            $shippingSubscription->setEndAt($length);
+
             $shippingSubscription->enable();
         }
 

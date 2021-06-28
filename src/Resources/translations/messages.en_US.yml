@@ -2,10 +2,16 @@ bitbag_sylius_shipping_subscription:
     form:
         product:
             shipping_subscription: Shipping subscription
+        shipping:
+            additional_requirements: Additional requirements
+            is_shipping_subscription_required: Is shipping subscription required?
+            from_total: From total of
         shipping_calculator:
             subscription_shipping_configuration:
                 amount: Minimum amount for free shipping
 bitbag_sylius_shipping_subscription_plugin:
     ui:
         shipping_subscriptions:
-            'Shipping subscriptions'
+            Shipping subscriptions
+        end_at:
+            End at

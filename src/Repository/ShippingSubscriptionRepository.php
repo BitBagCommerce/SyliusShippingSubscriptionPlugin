@@ -8,7 +8,7 @@ use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class ShippingSubscriptionRepository extends EntityRepository implements ShippingSubscriptionRepositoryInterface
+final class ShippingSubscriptionRepository extends EntityRepository implements ShippingSubscriptionRepositoryInterface
 {
     public function findOneByCode(string $code): ?ShippingSubscriptionInterface
     {

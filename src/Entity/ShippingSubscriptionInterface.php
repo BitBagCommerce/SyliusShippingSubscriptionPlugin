@@ -39,4 +39,8 @@ interface ShippingSubscriptionInterface extends ResourceInterface
     public function enable(): void;
 
     public function disable(): void;
+
+    public function setEndAt(\DateTime $endAt): void;
+
+    public function getEndAt(): \DateTime;
 }

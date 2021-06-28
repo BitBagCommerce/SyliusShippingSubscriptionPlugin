@@ -24,3 +24,15 @@ sylius_product:
         product:
             classes:
                 model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Product\Product
+
+sylius_shipping:
+    resources:
+        shipping_method:
+            classes:
+                model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Shipping\ShippingMethod
+
+sylius_customer:
+    resources:
+        customer:
+            classes:
+                model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Customer\Customer

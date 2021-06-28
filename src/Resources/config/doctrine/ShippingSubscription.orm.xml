@@ -16,6 +16,10 @@
             <gedmo:timestampable on="update"/>
         </field>
 
+        <field name="endAt" column="end_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+
         <many-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface">
             <join-column name="customer_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
         </many-to-one>
