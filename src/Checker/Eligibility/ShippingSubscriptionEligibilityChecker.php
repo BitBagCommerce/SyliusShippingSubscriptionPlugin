@@ -47,7 +47,13 @@ final class ShippingSubscriptionEligibilityChecker implements ShippingMethodElig
         $hasActiveSubscription = $this->subscriptionExpirationChecker->checkSubscription($customer);
 
         /** @var CustomShippingInterface $shippingMethod */
-        if($shippingMethod->isShippingSubscription() && !$hasActiveSubscription){
+        $orderHasMinimumTotal = $order->getTotal() >= $shippingMethod->getAvailableFromTotal();
+
+        if($shippingMethod->isShippingSubscription() && !$hasActiveSubscription)
+        {
+            return false;
+        }
+        if($shippingMethod->isShippingSubscription() && !$orderHasMinimumTotal){
             return false;
         }
         return true;
@@ -59,5 +65,4 @@ final class ShippingSubscriptionEligibilityChecker implements ShippingMethodElig
             null !== $subject->getOrder()
             ;
     }
-
 }
