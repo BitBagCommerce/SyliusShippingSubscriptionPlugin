@@ -36,3 +36,9 @@ sylius_customer:
         customer:
             classes:
                 model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Customer\Customer
+
+sylius_order:
+    resources:
+        order_item_unit:
+            classes:
+                repository: Tests\BitBag\SyliusShippingSubscriptionPlugin\Application\src\Repository\OrderItemUnitRepository

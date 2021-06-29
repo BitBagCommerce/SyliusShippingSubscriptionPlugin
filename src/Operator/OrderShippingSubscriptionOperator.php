@@ -6,6 +6,7 @@ namespace BitBag\SyliusShippingSubscriptionPlugin\Operator;
 
 use BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionOrderRepositoryAwareInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionRepositoryInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ObjectManager;
@@ -20,37 +21,39 @@ final class OrderShippingSubscriptionOperator
     /** @var ShippingSubscriptionFactory */
     private $shippingSubscriptionFactory;
 
-    /** @var ObjectManager */
-    private $manager;
+    /** @var ShippingSubscriptionOrderRepositoryAwareInterface */
+    private $orderItemUnitRepository;
 
     /** @var ShippingSubscriptionRepositoryInterface */
     private $shippingSubscriptionRepository;
 
+    /** @var ObjectManager */
+    private $manager;
+
     public function __construct(
         ShippingSubscriptionFactory $shippingSubscriptionFactory,
         ShippingSubscriptionRepositoryInterface $shippingSubscriptionRepository,
+        ShippingSubscriptionOrderRepositoryAwareInterface $orderItemUnitRepository,
         ObjectManager $manager
     ) {
         $this->shippingSubscriptionFactory = $shippingSubscriptionFactory;
-        $this->manager = $manager;
         $this->shippingSubscriptionRepository = $shippingSubscriptionRepository;
+        $this->orderItemUnitRepository = $orderItemUnitRepository;
+        $this->manager = $manager;
     }
 
     public function create(OrderInterface $order): void
     {
-        $items = self::getOrderItemsThatAreShippingSubscriptions($order);
+        $units = $this->orderItemUnitRepository->findUnitsWithProductShippingSubscription($order);
 
-        if (count($items) === 0) {
+        if (count($units) === 0) {
             return;
         }
 
-        foreach ($items as $item) {
-            /** @var OrderItemUnitInterface $unit */
-            foreach ($item->getUnits() as $unit) {
-                $shippingSubscription = $this->shippingSubscriptionFactory->createFromOrderItemUnit($unit);
+        foreach ($units as $unit) {
+            $shippingSubscription = $this->shippingSubscriptionFactory->createFromOrderItemUnit($unit);
 
-                $this->manager->persist($shippingSubscription);
-            }
+            $this->manager->persist($shippingSubscription);
         }
 
         $this->manager->flush();
@@ -58,17 +61,15 @@ final class OrderShippingSubscriptionOperator
 
     public function enable(OrderInterface $order): void
     {
-        $shippingSubscriptions = $this->getShippingSubscriptions($order);
+        $shippingSubscriptions = $this->shippingSubscriptionRepository->findSubscriptionsByOrder($order);
 
         if (count($shippingSubscriptions) === 0) {
             return;
         }
 
         foreach ($shippingSubscriptions as $shippingSubscription) {
-            $length = new \DateTime('now');
-            $length->modify("+1 year");
-            $shippingSubscription->setEndAt($length);
-
+            $date = (new \DateTime())->modify('+1 year');
+            $shippingSubscription->setExpiresAt($date);
             $shippingSubscription->enable();
         }
 
@@ -77,7 +78,7 @@ final class OrderShippingSubscriptionOperator
 
     public function disable(OrderInterface $order): void
     {
-        $shippingSubscriptions = $this->getShippingSubscriptions($order);
+        $shippingSubscriptions = $this->shippingSubscriptionRepository->findSubscriptionsByOrder($order);
 
         if (count($shippingSubscriptions) === 0) {
             return;
@@ -90,43 +91,4 @@ final class OrderShippingSubscriptionOperator
         $this->manager->flush();
     }
 
-    /**
-     * @return Collection|OrderItemInterface[]
-     */
-    private static function getOrderItemsThatAreShippingSubscriptions(OrderInterface $order): Collection
-    {
-        return $order->getItems()->filter(static function (OrderItemInterface $item): bool {
-            /** @var ProductInterface|null $product */
-            $product = $item->getProduct();
-
-            if(!$product instanceof ProductShippingSubscriptionAwareInterface){
-                return false;
-            }
-
-            return $product->isShippingSubscription();
-        });
-    }
-
-    /**
-     * @return ShippingSubscriptionInterface[]
-     */
-    private function getShippingSubscriptions(OrderInterface $order): array
-    {
-        $shippingSubscriptions = [];
-
-        $items = self::getOrderItemsThatAreShippingSubscriptions($order);
-        foreach ($items as $item) {
-            /** @var OrderItemUnitInterface $unit */
-            foreach ($item->getUnits() as $unit) {
-                $subscription = $this->shippingSubscriptionRepository->findOneByOrderItemUnit($unit);
-                if (null === $subscription) {
-                    continue;
-                }
-
-                $shippingSubscriptions[] = $subscription;
-            }
-        }
-
-        return $shippingSubscriptions;
-    }
 }

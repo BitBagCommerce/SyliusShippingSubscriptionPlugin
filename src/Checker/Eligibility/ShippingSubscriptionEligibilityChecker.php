@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Checker\Eligibility;
 
-use BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription\SubscriptionExpirationChecker;
-use BitBag\SyliusShippingSubscriptionPlugin\Entity\CustomerInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription\SubscriptionExpirationCheckerInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingMethodInterface as CustomShippingInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Entity\SubscriptionAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
@@ -14,6 +14,13 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class ShippingSubscriptionEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
+    /** @var SubscriptionExpirationCheckerInterface */
+    private $subscriptionExpirationChecker;
+
+    public function __construct(SubscriptionExpirationCheckerInterface $subscriptionExpirationChecker)
+    {
+        $this->subscriptionExpirationChecker = $subscriptionExpirationChecker;
+    }
 
     public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool
     {
@@ -24,18 +31,20 @@ final class ShippingSubscriptionEligibilityChecker implements ShippingMethodElig
         ShippingMethodInterface $shippingMethod
     ): bool {
         /** @var ShipmentInterface $shippingSubject */
-        if(!$this->supports($shippingSubject)) return false;
+        if(!$this->supports($shippingSubject)) {
+            return false;
+        }
 
         /** @var OrderInterface $order */
         $order = $shippingSubject->getOrder();
 
-        /** @var CustomerInterface $customer */
+        /** @var SubscriptionAwareInterface $customer */
         $customer = $order->getCustomer();
-        if(!$customer) return false;
+        if(!$customer){
+            return false;
+        }
 
-        $subscriptionExpirationChecker = new SubscriptionExpirationChecker($customer);
-
-        $hasActiveSubscription = $subscriptionExpirationChecker->isSubscriptionActive();
+        $hasActiveSubscription = $this->subscriptionExpirationChecker->checkSubscription($customer);
 
         /** @var CustomShippingInterface $shippingMethod */
         if($shippingMethod->isShippingSubscription() && !$hasActiveSubscription){

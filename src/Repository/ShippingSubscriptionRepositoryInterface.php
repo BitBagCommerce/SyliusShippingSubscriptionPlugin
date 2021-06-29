@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace BitBag\SyliusShippingSubscriptionPlugin\Repository;
 
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ShippingSubscriptionRepositoryInterface
 {
     public function findOneByCode(string $code): ?ShippingSubscriptionInterface;
 
     public function findOneByOrderItemUnit(OrderItemUnitInterface $orderItemUnit): ?ShippingSubscriptionInterface;
+
+    /** @return array<int, ShippingSubscriptionInterface> */
+    public function findSubscriptionsByOrder(OrderInterface $order): array;
 }

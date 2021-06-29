@@ -18,7 +18,7 @@ final class ShippingMethodTypeExtension extends AbstractTypeExtension
             ->add('shipping_subscription', CheckboxType::class, [
                 'label' => 'bitbag_sylius_shipping_subscription.form.shipping.is_shipping_subscription_required',
             ])
-            ->add('fromTotal', MoneyType::class, [
+            ->add('availableFromTotal', MoneyType::class, [
                 'label' => 'bitbag_sylius_shipping_subscription.form.shipping.from_total',
                 'required' => false,
             ])

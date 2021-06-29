@@ -13,35 +13,23 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     protected $shipping_subscription;
 
     /** @var integer */
-    protected $fromTotal;
+    protected $availableFromTotal;
 
-    /**
-     * @return int
-     */
-    public function getFromTotal(): int
+    public function getAvailableFromTotal(): int
     {
-        return $this->fromTotal;
+        return $this->availableFromTotal;
     }
 
-    /**
-     * @param int $fromTotal
-     */
-    public function setFromTotal(int $fromTotal): void
+    public function setAvailableFromTotal(int $availableFromTotal): void
     {
-        $this->fromTotal = $fromTotal;
+        $this->availableFromTotal = $availableFromTotal;
     }
 
-    /**
-     * @return bool|null
-     */
     public function isShippingSubscription(): bool
     {
         return $this->shipping_subscription;
     }
 
-    /**
-     * @param bool|null $shipping_subscription
-     */
     public function setShippingSubscription(bool $shipping_subscription): void
     {
         $this->shipping_subscription = $shipping_subscription;

@@ -9,7 +9,7 @@
                 <option name="default">0</option>
             </options>
         </field>
-        <field name="fromTotal" type="integer">
+        <field name="availableFromTotal" type="integer">
         </field>
     </entity>
 </doctrine-mapping>

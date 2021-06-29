@@ -16,7 +16,7 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <field name="endAt" column="end_at" type="datetime" nullable="true">
+        <field name="expiresAt" column="expiresAt" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
 

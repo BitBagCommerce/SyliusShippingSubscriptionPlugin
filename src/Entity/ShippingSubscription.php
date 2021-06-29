@@ -32,7 +32,7 @@ class ShippingSubscription implements ShippingSubscriptionInterface
     protected $channel;
 
     /** @var \DateTime */
-    protected $endAt;
+    protected $expiresAt;
 
     public function __construct()
     {
@@ -43,23 +43,15 @@ class ShippingSubscription implements ShippingSubscriptionInterface
         return (string) $this->code;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getEndAt(): \DateTime
+    public function getExpiresAt(): \DateTimeInterface
     {
-        return $this->endAt;
+        return $this->expiresAt;
     }
 
-    /**
-     * @param \DateTime $endAt
-     */
-    public function setEndAt(\DateTime $endAt): void
+    public function setExpiresAt(\DateTime $expiresAt): void
     {
-        $this->endAt = $endAt;
+        $this->expiresAt = $expiresAt;
     }
-
-
 
     public function getCode(): ?string
     {

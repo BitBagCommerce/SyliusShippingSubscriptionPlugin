@@ -4,34 +4,32 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription;
 
-use BitBag\SyliusShippingSubscriptionPlugin\Entity\CustomerInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Entity\SubscriptionAwareInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionRepositoryInterface;
+use Doctrine\ORM\NonUniqueResultException;
 
-final class SubscriptionExpirationChecker
+final class SubscriptionExpirationChecker implements SubscriptionExpirationCheckerInterface
 {
-    /** @var CustomerInterface */
-    private $customer;
+    /** @var ShippingSubscriptionRepositoryInterface */
+    private $customerRepository;
 
-    /**
-     * SubscriptionExpirationChecker constructor.
-     * @param CustomerInterface $customer
-     */
-    public function __construct(CustomerInterface $customer)
+    public function __construct(ShippingSubscriptionRepositoryInterface $customerRepository)
     {
-        $this->customer = $customer;
+        $this->customerRepository = $customerRepository;
     }
 
-    public function isSubscriptionActive(): bool
+    /**
+     * Checks the customer has an active subscription
+     *
+     * @throws NonUniqueResultException
+     */
+    public function checkSubscription(SubscriptionAwareInterface $customer): bool
     {
         $hasActiveSubscription = false;
-        foreach($this->customer->getSubscriptions() as $subscription)
-        {
-            $subscriptionStart = $subscription->getUpdatedAt()->format('d-m-Y H:i:s');
-            $subscriptionEnd = $subscription->getEndAt()->format('d-m-Y H:i:s');
-            if($subscriptionStart <= $subscriptionEnd && $subscription->isEnabled()){
-                $hasActiveSubscription = true;
-            }
+        $subscription = $this->customerRepository->findActiveSubscription($customer);
+        if($subscription){
+            $hasActiveSubscription = true;
         }
         return $hasActiveSubscription;
     }
-
 }
