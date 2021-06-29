@@ -1,2 +1,2 @@
-bitbag_sylius_wishlist_plugin:
+bitbag_sylius_shipping_subscription_plugin:
     resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/routing.yml"
