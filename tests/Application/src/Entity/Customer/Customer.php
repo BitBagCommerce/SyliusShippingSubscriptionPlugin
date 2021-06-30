@@ -18,5 +18,4 @@ class Customer extends BaseCustomer implements SubscriptionAwareInterface
     {
         return $this->shippingSubscriptions;
     }
-
 }
