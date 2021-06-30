@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Shipping;
 
-use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingMethodInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
 
-class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
+class ShippingSubscriptionMethod extends BaseShippingMethod implements ShippingSubscriptionMethodInterface
 {
     /** @var boolean */
     protected $shippingSubscription;
