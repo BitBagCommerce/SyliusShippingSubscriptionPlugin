@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription;
 
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\SubscriptionAwareInterface;

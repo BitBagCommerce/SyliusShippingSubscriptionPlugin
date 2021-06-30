@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Checker\Eligibility;
 
 use BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription\SubscriptionExpirationCheckerInterface;
-use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingMethodInterface as CustomShippingInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionMethodInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\SubscriptionAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -24,14 +25,18 @@ final class ShippingSubscriptionEligibilityChecker implements ShippingMethodElig
 
     public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool
     {
+        if (!$shippingSubject instanceof ShipmentInterface || !$shippingMethod instanceof ShippingSubscriptionMethodInterface) {
+            return false;
+        }
+
         return $this->isSubscriptionActive($shippingSubject, $shippingMethod);
     }
+
     private function isSubscriptionActive(
-        ShippingSubjectInterface $shippingSubject,
-        ShippingMethodInterface $shippingMethod
+        ShipmentInterface $shippingSubject,
+        ShippingSubscriptionMethodInterface $shippingMethod
     ): bool {
-        /** @var ShipmentInterface $shippingSubject */
-        if(!$this->supports($shippingSubject)) {
+        if (!$this->supports($shippingSubject)) {
             return false;
         }
 
@@ -40,22 +45,21 @@ final class ShippingSubscriptionEligibilityChecker implements ShippingMethodElig
 
         /** @var SubscriptionAwareInterface $customer */
         $customer = $order->getCustomer();
-        if(!$customer){
+        if (!$customer) {
             return false;
         }
 
         $hasActiveSubscription = $this->subscriptionExpirationChecker->checkSubscription($customer);
 
-        /** @var CustomShippingInterface $shippingMethod */
         $orderHasMinimumTotal = $order->getTotal() >= $shippingMethod->getAvailableFromTotal();
 
-        if($shippingMethod->isShippingSubscription() && !$hasActiveSubscription)
-        {
+        if ($shippingMethod->isShippingSubscription() && !$hasActiveSubscription) {
             return false;
         }
-        if($shippingMethod->isShippingSubscription() && !$orderHasMinimumTotal){
+        if ($shippingMethod->isShippingSubscription() && !$orderHasMinimumTotal) {
             return false;
         }
+
         return true;
     }
 

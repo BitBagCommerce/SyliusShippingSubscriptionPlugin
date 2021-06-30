@@ -7,9 +7,9 @@ namespace BitBag\SyliusShippingSubscriptionPlugin\Repository;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\SubscriptionAwareInterface;
 use Doctrine\ORM\NonUniqueResultException;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ShippingSubscriptionRepository extends EntityRepository implements ShippingSubscriptionRepositoryInterface
 {

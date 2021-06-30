@@ -7,7 +7,7 @@ namespace Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Shipping;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
 
-class ShippingSubscriptionMethod extends BaseShippingMethod implements ShippingSubscriptionMethodInterface
+class ShippingMethod extends BaseShippingMethod implements ShippingSubscriptionMethodInterface
 {
     /** @var boolean */
     protected $shippingSubscription;

@@ -5,16 +5,10 @@ declare(strict_types=1);
 namespace BitBag\SyliusShippingSubscriptionPlugin\Operator;
 
 use BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory;
-use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionOrderRepositoryAwareInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionRepositoryInterface;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use BitBag\SyliusShippingSubscriptionPlugin\Entity\ProductShippingSubscriptionAwareInterface;
 
 final class OrderShippingSubscriptionOperator
 {
@@ -28,18 +22,18 @@ final class OrderShippingSubscriptionOperator
     private $shippingSubscriptionRepository;
 
     /** @var ObjectManager */
-    private $manager;
+    private $shippingSubscriptionManager;
 
     public function __construct(
         ShippingSubscriptionFactory $shippingSubscriptionFactory,
         ShippingSubscriptionRepositoryInterface $shippingSubscriptionRepository,
         ShippingSubscriptionOrderRepositoryAwareInterface $orderItemUnitRepository,
-        ObjectManager $manager
+        ObjectManager $shippingSubscriptionManager
     ) {
         $this->shippingSubscriptionFactory = $shippingSubscriptionFactory;
         $this->shippingSubscriptionRepository = $shippingSubscriptionRepository;
         $this->orderItemUnitRepository = $orderItemUnitRepository;
-        $this->manager = $manager;
+        $this->shippingSubscriptionManager = $shippingSubscriptionManager;
     }
 
     public function create(OrderInterface $order): void
@@ -53,10 +47,10 @@ final class OrderShippingSubscriptionOperator
         foreach ($units as $unit) {
             $shippingSubscription = $this->shippingSubscriptionFactory->createFromOrderItemUnit($unit);
 
-            $this->manager->persist($shippingSubscription);
+            $this->shippingSubscriptionManager->persist($shippingSubscription);
         }
 
-        $this->manager->flush();
+        $this->shippingSubscriptionManager->flush();
     }
 
     public function enable(OrderInterface $order): void
@@ -73,7 +67,7 @@ final class OrderShippingSubscriptionOperator
             $shippingSubscription->enable();
         }
 
-        $this->manager->flush();
+        $this->shippingSubscriptionManager->flush();
     }
 
     public function disable(OrderInterface $order): void
@@ -88,7 +82,6 @@ final class OrderShippingSubscriptionOperator
             $shippingSubscription->disable();
         }
 
-        $this->manager->flush();
+        $this->shippingSubscriptionManager->flush();
     }
-
 }

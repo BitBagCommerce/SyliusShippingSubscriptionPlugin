@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Form\Extension;
-
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
@@ -24,6 +24,7 @@ final class ShippingMethodTypeExtension extends AbstractTypeExtension
             ])
         ;
     }
+
     public static function getExtendedTypes(): iterable
     {
         return [ShippingMethodType::class];

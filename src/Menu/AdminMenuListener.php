@@ -20,6 +20,5 @@ final class AdminMenuListener
             ->setLabel('bitbag_sylius_shipping_subscription_plugin.ui.shipping_subscriptions')
             ->setLabelAttribute('icon', 'redo alternate')
         ;
-
     }
 }

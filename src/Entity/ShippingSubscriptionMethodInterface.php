@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Entity;
 
-interface ShippingMethodInterface
+interface ShippingSubscriptionMethodInterface
 {
     public function getAvailableFromTotal(): int;
 
