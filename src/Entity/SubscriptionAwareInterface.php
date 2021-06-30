@@ -2,9 +2,9 @@
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Entity;
 
-use Doctrine\ORM\PersistentCollection;
+use Doctrine\Common\Collections\Collection;
 
 interface SubscriptionAwareInterface
 {
-    public function getSubscriptions(): ?PersistentCollection;
+    public function getSubscriptions(): ?Collection;
 }

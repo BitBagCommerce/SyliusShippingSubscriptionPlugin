@@ -6,7 +6,6 @@ namespace BitBag\SyliusShippingSubscriptionPlugin\Repository;
 
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscriptionInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Entity\SubscriptionAwareInterface;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\NonUniqueResultException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -48,7 +47,7 @@ class ShippingSubscriptionRepository extends EntityRepository implements Shippin
     /**
      * @throws NonUniqueResultException
      */
-    public function findActiveSubscription(SubscriptionAwareInterface $customer)
+    public function findActiveSubscription(SubscriptionAwareInterface $customer): ?ShippingSubscriptionInterface
     {
         $qb = $this->createQueryBuilder('s')
             ->andWhere('s.expiresAt > s.updatedAt')

@@ -40,7 +40,7 @@ interface ShippingSubscriptionInterface extends ResourceInterface
 
     public function disable(): void;
 
-    public function setExpiresAt(\DateTime $expiresAt): void;
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
 
-    public function getExpiresAt(): \DateTimeInterface;
+    public function getExpiresAt(): ?\DateTimeInterface;
 }

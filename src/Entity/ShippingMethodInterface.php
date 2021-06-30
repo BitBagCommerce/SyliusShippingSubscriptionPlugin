@@ -10,5 +10,5 @@ interface ShippingMethodInterface
 
     public function isShippingSubscription(): bool;
 
-    public function setShippingSubscription(bool $shipping_subscription): void;
+    public function setShippingSubscription(bool $shippingSubscription): void;
 }

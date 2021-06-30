@@ -31,7 +31,7 @@ class ShippingSubscription implements ShippingSubscriptionInterface
     /** @var ChannelInterface */
     protected $channel;
 
-    /** @var \DateTime */
+    /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
     public function __construct()
@@ -43,12 +43,12 @@ class ShippingSubscription implements ShippingSubscriptionInterface
         return (string) $this->code;
     }
 
-    public function getExpiresAt(): \DateTimeInterface
+    public function getExpiresAt(): ?\DateTimeInterface
     {
         return $this->expiresAt;
     }
 
-    public function setExpiresAt(\DateTime $expiresAt): void
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): void
     {
         $this->expiresAt = $expiresAt;
     }
