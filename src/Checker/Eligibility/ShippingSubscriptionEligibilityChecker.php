@@ -32,7 +32,7 @@ final class ShippingSubscriptionEligibilityChecker implements ShippingMethodElig
         return $this->isSubscriptionActive($shippingSubject, $shippingMethod);
     }
 
-    private function isSubscriptionActive(
+    public function isSubscriptionActive(
         ShipmentInterface $shippingSubject,
         ShippingSubscriptionMethodInterface $shippingMethod
     ): bool {

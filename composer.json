@@ -57,7 +57,8 @@
             "Tests\\BitBag\\SyliusShippingSubscriptionPlugin\\": [
                 "tests/",
                 "tests/Application/src"
-            ]
+            ],
+            "spec\\BitBag\\SyliusShippingSubscriptionPlugin\\": "spec/"
         }
     },
     "autoload-dev": {
