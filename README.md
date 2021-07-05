@@ -430,8 +430,6 @@ Finish the installation by updating the database schema and installing assets:
 ## Usage
 ----
 
-### Rendering the wishlist
-
 Create a virtual product which will be a subscription for free shipping.
 
 ![Screenshot showing subscription product creation](docs/images/admin-create-product.png)
