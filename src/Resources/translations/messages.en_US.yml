@@ -6,6 +6,8 @@ bitbag_sylius_shipping_subscription:
             additional_requirements: Additional requirements
             is_shipping_subscription_required: Is shipping subscription required?
             from_total: From total of
+            length: Subscription length (months)
+            subscription_time: Shipping subscription
         shipping_calculator:
             subscription_shipping_configuration:
                 amount: Minimum amount for free shipping
