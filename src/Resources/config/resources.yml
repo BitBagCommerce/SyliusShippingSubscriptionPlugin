@@ -1,0 +1,7 @@
+sylius_resource:
+    resources:
+        bitbag_sylius_shipping_subscription_plugin.shipping_subscription:
+            driver: doctrine/orm
+            classes:
+                model: BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscription
+                repository: BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionRepository

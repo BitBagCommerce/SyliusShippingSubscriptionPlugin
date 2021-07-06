@@ -2,28 +2,44 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-
-
-
         <service id="bitbag.sylius_shipping_subscription_plugin.form.extension.product_type_extension"
-                 class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ProductTypeExtension" >
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ProductTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
         </service>
 
         <service id="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory"
                  class="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory"
-                 decorates="bitbag_sylius_shipping_subscription_plugin.factory.shipping_subscription"
-        >
+                 decorates="bitbag_sylius_shipping_subscription_plugin.factory.shipping_subscription">
             <argument type="service" id="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory.inner"/>
         </service>
-
 
         <service id="bitbag_sylius_shipping_subscription.operator.shipping_subscription"
                  class="BitBag\SyliusShippingSubscriptionPlugin\Operator\OrderShippingSubscriptionOperator" public="true">
             <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.factory.shipping_subscription" />
             <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.repository.shipping_subscription" />
+            <argument type="service" id="sylius.repository.order_item_unit" />
             <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.manager.shipping_subscription" />
+        </service>
 
+        <service id="bitbag.sylius_shipping_subscription_plugin.menu.admin_menu_listener"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Menu\AdminMenuListener">
+            <tag name="kernel.event_listener" event="sylius.menu.admin.main" method="addSubscriptionMenu"/>
+        </service>
+
+        <service id="bitbag.sylius_shipping_subscription_plugin.type.shipping_method"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ShippingMethodTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" />
+        </service>
+
+        <service id="BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription\SubscriptionExpirationChecker" public="true">
+            <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.repository.shipping_subscription"/>
+        </service>
+        <service id="bitbag_sylius_shipping_subscription.checker.subscription_expiration_checker" alias="BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription\SubscriptionExpirationChecker"/>
+
+        <service class="BitBag\SyliusShippingSubscriptionPlugin\Checker\Eligibility\ShippingSubscriptionEligibilityChecker"
+                 id="bitbag.sylius_shipping_subscription_plugin.checker.eligibility.shipping_subscription_eligibility_checker">
+            <argument type="service" id="bitbag_sylius_shipping_subscription.checker.subscription_expiration_checker" />
+            <tag name="sylius.shipping_method_eligibility_checker"/>
         </service>
     </services>
 </container>

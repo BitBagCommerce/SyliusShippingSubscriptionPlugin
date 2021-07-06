@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\BitBag\SyliusShippingSubscriptionPlugin\Application\src\Repository;
+
+use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionOrderRepositoryAwareInterface;
+use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionOrderRepositoryTrait;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderItemUnitRepository as BaseOrderItemUnitRepository;
+
+final class OrderItemUnitRepository extends BaseOrderItemUnitRepository implements ShippingSubscriptionOrderRepositoryAwareInterface
+{
+    use ShippingSubscriptionOrderRepositoryTrait;
+}

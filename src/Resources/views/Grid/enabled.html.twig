@@ -1,0 +1,12 @@
+{% set map = {
+    '0': {'color': 'yellow', 'icon': 'clock'},
+    '1': {'color': 'button primary', 'icon': 'check'}
+} %}
+<span class="ui label {{ map[data].color }}">
+    <i class="icon {{ map[data].icon }}"></i>
+    {% if data == 0 %}
+        {{ 'sylius.ui.disabled'|trans }}
+    {% else %}
+        {{ 'sylius.ui.enabled'|trans }}
+    {% endif %}
+</span>

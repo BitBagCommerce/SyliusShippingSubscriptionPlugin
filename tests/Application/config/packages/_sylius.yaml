@@ -6,9 +6,39 @@ imports:
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
 
+    - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
+
+    - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/services.xml" }
+    - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/resources.yml" }
+    - { resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/grids.yml" }
+
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
 
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_product:
+    resources:
+        product:
+            classes:
+                model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Product\Product
+
+sylius_shipping:
+    resources:
+        shipping_method:
+            classes:
+                model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Shipping\ShippingMethod
+
+sylius_customer:
+    resources:
+        customer:
+            classes:
+                model: Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Customer\Customer
+
+sylius_order:
+    resources:
+        order_item_unit:
+            classes:
+                repository: Tests\BitBag\SyliusShippingSubscriptionPlugin\Application\src\Repository\OrderItemUnitRepository

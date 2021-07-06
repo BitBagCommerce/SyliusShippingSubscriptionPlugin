@@ -11,7 +11,7 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ShippingSubscriptionInterface extends ResourceInterface
-{ 
+{
     public function getCode(): ?string;
 
     public function setCode(?string $code): void;
@@ -33,10 +33,14 @@ interface ShippingSubscriptionInterface extends ResourceInterface
     public function getChannel(): ?ChannelInterface;
 
     public function setChannel(ChannelInterface $channel): void;
-    
+
     public function setEnabled(?bool $enabled): void;
 
     public function enable(): void;
 
     public function disable(): void;
+
+    public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
+
+    public function getExpiresAt(): ?\DateTimeInterface;
 }
