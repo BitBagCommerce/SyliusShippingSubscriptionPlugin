@@ -13,9 +13,8 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 
-class ShippingSubscriptionEligibilityCheckerSpec extends ObjectBehavior
+final class ShippingSubscriptionEligibilityCheckerSpec extends ObjectBehavior
 {
-
     function let(
         SubscriptionExpirationCheckerInterface $subscriptionExpirationChecker
     ): void {
@@ -51,17 +50,17 @@ class ShippingSubscriptionEligibilityCheckerSpec extends ObjectBehavior
         ShipmentInterface $shippingSubject,
         ShippingSubscriptionMethodInterface $shippingMethod,
         OrderInterface $order,
-        SubscriptionAwareInterface $subscriptionAware,
+        SubscriptionAwareInterface $customer,
         SubscriptionExpirationCheckerInterface $subscriptionExpirationChecker
     )
     {
-        $order->getCustomer()->willReturn($subscriptionAware);
+        $order->getCustomer()->willReturn($customer);
         $order->getTotal()->willReturn(20000);
 
 
         $shippingSubject->getOrder()->willReturn($order);
 
-        $subscriptionExpirationChecker->checkSubscription($subscriptionAware)->willReturn(false);
+        $subscriptionExpirationChecker->checkSubscription($customer)->willReturn(false);
 
         $shippingMethod->getAvailableFromTotal()->willReturn(20000);
         $shippingMethod->isShippingSubscription()->willReturn(true);
@@ -74,17 +73,17 @@ class ShippingSubscriptionEligibilityCheckerSpec extends ObjectBehavior
         ShipmentInterface $shippingSubject,
         ShippingSubscriptionMethodInterface $shippingMethod,
         OrderInterface $order,
-        SubscriptionAwareInterface $subscriptionAware,
+        SubscriptionAwareInterface $customer,
         SubscriptionExpirationCheckerInterface $subscriptionExpirationChecker
     )
     {
-        $order->getCustomer()->willReturn($subscriptionAware);
+        $order->getCustomer()->willReturn($customer);
         $order->getTotal()->willReturn(19999);
 
 
         $shippingSubject->getOrder()->willReturn($order);
 
-        $subscriptionExpirationChecker->checkSubscription($subscriptionAware)->willReturn(true);
+        $subscriptionExpirationChecker->checkSubscription($customer)->willReturn(true);
 
         $shippingMethod->getAvailableFromTotal()->willReturn(20000);
         $shippingMethod->isShippingSubscription()->willReturn(true);
@@ -97,16 +96,16 @@ class ShippingSubscriptionEligibilityCheckerSpec extends ObjectBehavior
         ShipmentInterface $shippingSubject,
         ShippingSubscriptionMethodInterface $shippingMethod,
         OrderInterface $order,
-        SubscriptionAwareInterface $subscriptionAware,
+        SubscriptionAwareInterface $customer,
         SubscriptionExpirationCheckerInterface $subscriptionExpirationChecker
     )
     {
-        $order->getCustomer()->willReturn($subscriptionAware);
+        $order->getCustomer()->willReturn($customer);
         $order->getTotal()->willReturn(19999);
 
         $shippingSubject->getOrder()->willReturn($order);
 
-        $subscriptionExpirationChecker->checkSubscription($subscriptionAware)->willReturn(false);
+        $subscriptionExpirationChecker->checkSubscription($customer)->willReturn(false);
 
         $shippingMethod->getAvailableFromTotal()->willReturn(20000);
         $shippingMethod->isShippingSubscription()->willReturn(false);
@@ -118,16 +117,16 @@ class ShippingSubscriptionEligibilityCheckerSpec extends ObjectBehavior
         ShipmentInterface $shippingSubject,
         ShippingSubscriptionMethodInterface $shippingMethod,
         OrderInterface $order,
-        SubscriptionAwareInterface $subscriptionAware,
+        SubscriptionAwareInterface $customer,
         SubscriptionExpirationCheckerInterface $subscriptionExpirationChecker
     )
     {
-        $order->getCustomer()->willReturn($subscriptionAware);
+        $order->getCustomer()->willReturn($customer);
         $order->getTotal()->willReturn(20000);
 
         $shippingSubject->getOrder()->willReturn($order);
 
-        $subscriptionExpirationChecker->checkSubscription($subscriptionAware)->willReturn(true);
+        $subscriptionExpirationChecker->checkSubscription($customer)->willReturn(true);
 
         $shippingMethod->getAvailableFromTotal()->willReturn(20000);
         $shippingMethod->isShippingSubscription()->willReturn(true);
