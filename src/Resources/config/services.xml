@@ -13,12 +13,18 @@
             <argument type="service" id="BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory.inner"/>
         </service>
 
+        <service id="bitbag_sylius_shipping_subscription_plugin.checker.length_checker"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription\SubscriptionLengthChecker">
+            <argument type="service" id="sylius.repository.order_item_unit" />
+        </service>
+
         <service id="bitbag_sylius_shipping_subscription.operator.shipping_subscription"
                  class="BitBag\SyliusShippingSubscriptionPlugin\Operator\OrderShippingSubscriptionOperator" public="true">
             <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.factory.shipping_subscription" />
             <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.repository.shipping_subscription" />
             <argument type="service" id="sylius.repository.order_item_unit" />
             <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.manager.shipping_subscription" />
+            <argument type="service" id="bitbag_sylius_shipping_subscription_plugin.checker.length_checker" />
         </service>
 
         <service id="bitbag.sylius_shipping_subscription_plugin.menu.admin_menu_listener"
@@ -40,6 +46,11 @@
                  id="bitbag.sylius_shipping_subscription_plugin.checker.eligibility.shipping_subscription_eligibility_checker">
             <argument type="service" id="bitbag_sylius_shipping_subscription.checker.subscription_expiration_checker" />
             <tag name="sylius.shipping_method_eligibility_checker"/>
+        </service>
+
+        <service id="bitbag.sylius_shipping_subscription_plugin.type.product_variant"
+                 class="BitBag\SyliusShippingSubscriptionPlugin\Form\Extension\ProductVariantTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" />
         </service>
     </services>
 </container>
