@@ -14,10 +14,14 @@ final class ProductTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-      ->add('shippingSubscription', CheckboxType::class, [
-        'required' => false,
-        'label' => 'bitbag_sylius_shipping_subscription.form.product.shipping_subscription',
-      ]);
+            ->add(
+                'shippingSubscription',
+                CheckboxType::class,
+                [
+                    'required' => false,
+                    'label' => 'bitbag_sylius_shipping_subscription.form.product.shipping_subscription',
+                ]
+            );
     }
 
     public static function getExtendedTypes(): iterable
