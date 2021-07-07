@@ -511,7 +511,7 @@ Override forms by creating `templates/bundles/SyliusAdminBundle/Product/Tab/_det
 
 ```
 
-Add state machine configuration for example to `config/state_machine.yaml`:
+Add state machine configuration for example to `config/packages/state_machine.yaml`:
 
 ```yaml
 winzou_state_machine:
@@ -553,6 +553,11 @@ Finish the installation by updating the database schema and installing assets:
 Create a virtual product which will be a subscription for free shipping.
 
 ![Screenshot showing subscription product creation](docs/images/admin-create-product.png)
+
+Create a variant and specify the length of subscription
+
+![Screenshot showing subscription variant creation](https://user-images.githubusercontent.com/63583880/124767918-822bc000-df38-11eb-8c1e-c1cea8fa00b2.png)
+
 
 Once a user purchases a subscription and payment is confirmed, the subscription is activated.
 
