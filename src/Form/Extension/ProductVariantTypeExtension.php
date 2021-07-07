@@ -17,8 +17,15 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
     {
         /** @var ProductVariantInterface $ProductVariant */
         $ProductVariant = $builder->getData();
-        /** @var ProductShippingSubscriptionAwareInterface $product */
-        $product = $ProductVariant->getProduct();
+
+        $isSubscription = false;
+
+        if($ProductVariant !== NULL){
+            /** @var ProductShippingSubscriptionAwareInterface $product */
+            $product = $ProductVariant->getProduct();
+            $isSubscription = $product->isShippingSubscription();
+        }
+
 
         $builder
             ->add(
@@ -27,7 +34,7 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
                 [
                     'label' => 'bitbag_sylius_shipping_subscription.form.shipping.length',
                     'required' => false,
-                    'attr' => ['is-subscription' => $product->isShippingSubscription()],
+                    'attr' => ['is-subscription' => $isSubscription],
                 ]
             );
     }
