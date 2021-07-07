@@ -57,11 +57,13 @@
             "Tests\\BitBag\\SyliusShippingSubscriptionPlugin\\": [
                 "tests/",
                 "tests/Application/src"
-            ],
-            "spec\\BitBag\\SyliusShippingSubscriptionPlugin\\": "spec/"
+            ]
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "spec\\BitBag\\SyliusShippingSubscriptionPlugin\\": "spec/"
+        },
         "classmap": ["tests/Application/Kernel.php"]
     }
 }
