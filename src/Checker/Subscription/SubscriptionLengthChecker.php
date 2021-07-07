@@ -21,7 +21,8 @@ final class SubscriptionLengthChecker implements SubscriptionLengthCheckerInterf
 
     public function checkSubscriptionLength(OrderInterface $order): int
     {
-        $units = $this->orderItemUnitRepository->findUnitsWithProductShippingSubscription($order);
+        return 0;
+        //$units = $this->orderItemUnitRepository->findUnitsWithProductShippingSubscription($order);
 
         if (count($units) === 0) {
             return 0;

@@ -15,7 +15,7 @@ trait ShippingSubscriptionOrderRepositoryTrait
             ->leftJoin('oi.variant', 'v')
             ->leftJoin('v.product', 'p')
             ->andWhere('oi.order = :order')
-            ->andWhere('p.shippingSubscription = 1')
+            //->andWhere('p.shippingSubscription = 1')
             ->setParameter(':order', $order)
         ;
 

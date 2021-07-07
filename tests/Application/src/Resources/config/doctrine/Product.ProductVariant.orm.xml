@@ -4,7 +4,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
     <entity name="Tests\BitBag\SyliusShippingSubscriptionPlugin\Entity\Product\ProductVariant" table="sylius_product_variant">
-        <field name="subscriptionLength" type="integer">
+        <field name="subscriptionLength" type="integer" nullable="true">
             <options>
                 <option name="default">0</option>
             </options>

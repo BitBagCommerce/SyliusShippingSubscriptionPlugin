@@ -12,12 +12,12 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
     /** @var int */
     protected $subscriptionLength;
 
-    public function getSubscriptionLength(): int
+    public function getSubscriptionLength(): ?int
     {
         return $this->subscriptionLength;
     }
 
-    public function setSubscriptionLength(int $subscriptionLength): void
+    public function setSubscriptionLength(?int $subscriptionLength): void
     {
         $this->subscriptionLength = $subscriptionLength;
     }
