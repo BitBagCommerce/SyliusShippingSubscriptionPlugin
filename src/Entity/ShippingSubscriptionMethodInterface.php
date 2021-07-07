@@ -6,11 +6,11 @@ namespace BitBag\SyliusShippingSubscriptionPlugin\Entity;
 
 interface ShippingSubscriptionMethodInterface
 {
-    public function getAvailableFromTotal(): int;
+    public function getAvailableFromTotal(): ?int;
 
-    public function setAvailableFromTotal(int $availableFromTotal): void;
+    public function setAvailableFromTotal(?int $availableFromTotal): void;
 
-    public function isShippingSubscription(): bool;
+    public function isShippingSubscription(): ?bool;
 
-    public function setShippingSubscription(bool $shippingSubscription): void;
+    public function setShippingSubscription(?bool $shippingSubscription): void;
 }

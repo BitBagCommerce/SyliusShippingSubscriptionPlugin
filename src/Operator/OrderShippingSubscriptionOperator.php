@@ -44,6 +44,10 @@ final class OrderShippingSubscriptionOperator
 
     public function create(OrderInterface $order): void
     {
+        if($order->getId() === NULL)
+        {
+            return;
+        }
         $units = $this->orderItemUnitRepository->findUnitsWithProductShippingSubscription($order);
 
         if (count($units) === 0) {
@@ -61,6 +65,10 @@ final class OrderShippingSubscriptionOperator
 
     public function enable(OrderInterface $order): void
     {
+        if($order->getId() === NULL)
+        {
+            return;
+        }
         $shippingSubscriptions = $this->shippingSubscriptionRepository->findSubscriptionsByOrder($order);
 
         if (count($shippingSubscriptions) === 0) {
@@ -79,6 +87,10 @@ final class OrderShippingSubscriptionOperator
 
     public function disable(OrderInterface $order): void
     {
+        if($order->getId() === NULL)
+        {
+            return;
+        }
         $shippingSubscriptions = $this->shippingSubscriptionRepository->findSubscriptionsByOrder($order);
 
         if (count($shippingSubscriptions) === 0) {

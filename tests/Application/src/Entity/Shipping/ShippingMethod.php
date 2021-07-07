@@ -9,28 +9,28 @@ use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
 
 class ShippingMethod extends BaseShippingMethod implements ShippingSubscriptionMethodInterface
 {
-    /** @var bool */
+    /** @var bool|null */
     protected $shippingSubscription;
 
-    /** @var int */
+    /** @var int|null */
     protected $availableFromTotal;
 
-    public function getAvailableFromTotal(): int
+    public function getAvailableFromTotal(): ?int
     {
         return $this->availableFromTotal;
     }
 
-    public function setAvailableFromTotal(int $availableFromTotal): void
+    public function setAvailableFromTotal(?int $availableFromTotal): void
     {
         $this->availableFromTotal = $availableFromTotal;
     }
 
-    public function isShippingSubscription(): bool
+    public function isShippingSubscription(): ?bool
     {
         return $this->shippingSubscription;
     }
 
-    public function setShippingSubscription(bool $shippingSubscription): void
+    public function setShippingSubscription(?bool $shippingSubscription): void
     {
         $this->shippingSubscription = $shippingSubscription;
     }
