@@ -15,14 +15,14 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var ProductVariantInterface $ProductVariant */
-        $ProductVariant = $builder->getData();
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $builder->getData();
 
         $isSubscription = false;
 
-        if($ProductVariant !== NULL){
+        if(NULL !== $productVariant){
             /** @var ProductShippingSubscriptionAwareInterface $product */
-            $product = $ProductVariant->getProduct();
+            $product = $productVariant->getProduct();
             $isSubscription = $product->isShippingSubscription();
         }
 
