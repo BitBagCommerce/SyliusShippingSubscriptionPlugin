@@ -20,7 +20,7 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
 
         $isSubscription = false;
 
-        if(NULL !== $productVariant){
+        if(null !== $productVariant){
             /** @var ProductShippingSubscriptionAwareInterface $product */
             $product = $productVariant->getProduct();
             $isSubscription = $product->isShippingSubscription();
