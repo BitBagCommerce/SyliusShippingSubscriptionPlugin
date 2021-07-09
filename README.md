@@ -98,9 +98,12 @@ class Product extends BaseProduct implements ProductShippingSubscriptionAwareInt
    Mapping (XML):
 
 ```xml
-<doctrine-mapping 
-        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                             http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
    <entity name="App\Entity\Product\Product" table="sylius_product">
@@ -141,10 +144,13 @@ class Customer extends BaseCustomer implements SubscriptionAwareInterface
    Mapping (XML):
 
 ```xml
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
    <entity name="App\Entity\Customer\Customer" table="sylius_customer">
       <one-to-many field="shippingSubscriptions" target-entity="BitBag\SyliusShippingSubscriptionPlugin\Entity\ShippingSubscription" mapped-by="customer" orphan-removal="true">
@@ -167,28 +173,28 @@ use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
     
 class ShippingMethod extends BaseShippingMethod implements ShippingSubscriptionMethodInterface
 {
-    /** @var bool */
+    /** @var bool|null */
     protected $shippingSubscription;
 
-    /** @var int */
+    /** @var int|null */
     protected $availableFromTotal;
-    
-    public function getAvailableFromTotal(): int
+
+    public function getAvailableFromTotal(): ?int
     {
         return $this->availableFromTotal;
     }
-    
-    public function setAvailableFromTotal(int $availableFromTotal): void
+
+    public function setAvailableFromTotal(?int $availableFromTotal): void
     {
         $this->availableFromTotal = $availableFromTotal;
     }
-    
-    public function isShippingSubscription(): bool
+
+    public function isShippingSubscription(): ?bool
     {
         return $this->shippingSubscription;
     }
-    
-    public function setShippingSubscription(bool $shippingSubscription): void
+
+    public function setShippingSubscription(?bool $shippingSubscription): void
     {
         $this->shippingSubscription = $shippingSubscription;
     }
@@ -197,23 +203,80 @@ class ShippingMethod extends BaseShippingMethod implements ShippingSubscriptionM
    Mapping (XML):
 
 ```xml
-   
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
-   <entity name="App\Entity\Shipping\ShippingMethod" table="sylius_shipping_method">
-      <field name="shippingSubscription" type="boolean">
-         <options>
-            <option name="default">0</option>
-         </options>
-      </field>
-      <field name="availableFromTotal" type="integer">
-      </field>
-   </entity>
+    <entity name="App\Entity\Shipping\ShippingMethod" table="sylius_shipping_method">
+        <field name="shippingSubscription" type="boolean" nullable="true">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="availableFromTotal" type="integer" nullable="true">
+        </field>
+    </entity>
 </doctrine-mapping>
+
+
 ```
+Extend `ProductVariant`:
+
+```php
+<?php
+    
+declare(strict_types=1);
+    
+namespace App\Entity\Product;
+    
+use BitBag\SyliusShippingSubscriptionPlugin\Entity\ProductVariantInterface;
+use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
+
+class ProductVariant extends BaseProductVariant implements ProductVariantInterface
+{
+    /** @var int */
+    protected $subscriptionLength;
+
+    public function getSubscriptionLength(): ?int
+    {
+        return $this->subscriptionLength;
+    }
+
+    public function setSubscriptionLength(?int $subscriptionLength): void
+    {
+        $this->subscriptionLength = $subscriptionLength;
+    }
+}
+```
+
+Mapping (XML):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="App\Entity\Product\ProductVariant" table="sylius_product_variant">
+        <field name="subscriptionLength" type="integer" nullable="true">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+    </entity>
+</doctrine-mapping>
+
+
+```
+
 Extend `OrderItemUnitRepository`:
 
 ```php
@@ -241,6 +304,9 @@ sylius_product:
         product:
             classes:
                 model: App\Entity\Product\Product
+        product_variant:
+            classes:
+                model: App\Entity\Product\ProductVariant
                    
 sylius_shipping:
     resources:
@@ -391,7 +457,61 @@ Override forms by creating `templates/bundles/SyliusAdminBundle/Product/Tab/_det
 </div>   
 ```
 
-Add state machine configuration for example to `config/state_machine.yaml`:
+  `templates/bundles/SyliusAdminBundle/Product/ProductVariant/Tab/_details.html.twig`
+
+```twig
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
+
+<div class="ui active tab" data-tab="details">
+    {% if form.subscriptionLength.vars.attr['is-subscription'] %}
+        <h3 class="ui dividing header">{{ 'bitbag_sylius_shipping_subscription.form.shipping.subscription_time'|trans }}</h3>
+        <div class="ui segment">
+            {{ form_row(form.subscriptionLength) }}
+        </div>
+    {% endif %}
+    <h3 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h3>
+    <div class="ui segments">
+        {{ translationForm(form.translations) }}
+        <div class="ui hidden divider"></div>
+        <div class="ui segment">
+            {{ form_row(form.code) }}
+            {{ form_row(form.enabled) }}
+            <div class="two fields">
+                {{ form_row(form.shippingCategory) }}
+            </div>
+            {{form_label(form.channelPricings)}}
+            {% include "@SyliusAdmin/Product/_channel_pricing.html.twig" with { product: product_variant.product, variantForm: form } only %}
+        </div>
+        <div class="ui segment">
+            <div class="one field">
+                {{ form_row(form.shippingRequired) }}
+            </div>
+        </div>
+        {% if form.optionValues is defined and form.optionValues|length > 0 %}
+            <div class="ui hidden divider"></div>
+            <div class="ui segment">
+                <h4 class="ui dividing header">{{ 'sylius.ui.options'|trans }}</h4>
+                {% for option_form in form.optionValues %}
+                    {{ form_row(option_form) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="ui hidden divider"></div>
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.properties'|trans }}</h4>
+            {{ form_row(form.height) }}
+            {{ form_row(form.width) }}
+            {{ form_row(form.depth) }}
+            {{ form_row(form.weight) }}
+        </div>
+    </div>
+
+    {{ sylius_template_event(['sylius.admin.product_variant.' ~ action ~ '.tab_details', 'sylius.admin.product_variant.tab_details'], {'form': form}) }}
+</div>
+
+```
+
+Add state machine configuration for example to `config/packages/state_machine.yaml`:
 
 ```yaml
 winzou_state_machine:
@@ -433,6 +553,11 @@ Finish the installation by updating the database schema and installing assets:
 Create a virtual product which will be a subscription for free shipping.
 
 ![Screenshot showing subscription product creation](docs/images/admin-create-product.png)
+
+Create a variant and specify the length of subscription
+
+![Screenshot showing subscription variant creation](https://user-images.githubusercontent.com/63583880/124767918-822bc000-df38-11eb-8c1e-c1cea8fa00b2.png)
+
 
 Once a user purchases a subscription and payment is confirmed, the subscription is activated.
 

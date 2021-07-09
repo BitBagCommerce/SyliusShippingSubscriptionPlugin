@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusShippingSubscriptionPlugin\Operator;
 
+use BitBag\SyliusShippingSubscriptionPlugin\Checker\Subscription\SubscriptionLengthCheckerInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Factory\ShippingSubscriptionFactory;
 use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionOrderRepositoryAwareInterface;
 use BitBag\SyliusShippingSubscriptionPlugin\Repository\ShippingSubscriptionRepositoryInterface;
@@ -24,23 +25,31 @@ final class OrderShippingSubscriptionOperator
     /** @var ObjectManager */
     private $shippingSubscriptionManager;
 
+    /** @var SubscriptionLengthCheckerInterface */
+    private $subscriptionLengthChecker;
+
     public function __construct(
         ShippingSubscriptionFactory $shippingSubscriptionFactory,
         ShippingSubscriptionRepositoryInterface $shippingSubscriptionRepository,
         ShippingSubscriptionOrderRepositoryAwareInterface $orderItemUnitRepository,
-        ObjectManager $shippingSubscriptionManager
+        ObjectManager $shippingSubscriptionManager,
+        SubscriptionLengthCheckerInterface $subscriptionLengthChecker
     ) {
         $this->shippingSubscriptionFactory = $shippingSubscriptionFactory;
         $this->shippingSubscriptionRepository = $shippingSubscriptionRepository;
         $this->orderItemUnitRepository = $orderItemUnitRepository;
         $this->shippingSubscriptionManager = $shippingSubscriptionManager;
+        $this->subscriptionLengthChecker = $subscriptionLengthChecker;
     }
 
     public function create(OrderInterface $order): void
     {
+        if (null === $order->getId()) {
+            return;
+        }
         $units = $this->orderItemUnitRepository->findUnitsWithProductShippingSubscription($order);
 
-        if (count($units) === 0) {
+        if (0 === count($units)) {
             return;
         }
 
@@ -55,14 +64,18 @@ final class OrderShippingSubscriptionOperator
 
     public function enable(OrderInterface $order): void
     {
+        if (null === $order->getId()) {
+            return;
+        }
         $shippingSubscriptions = $this->shippingSubscriptionRepository->findSubscriptionsByOrder($order);
 
-        if (count($shippingSubscriptions) === 0) {
+        if (0 === count($shippingSubscriptions)) {
             return;
         }
 
         foreach ($shippingSubscriptions as $shippingSubscription) {
-            $date = (new \DateTime())->modify('+1 year');
+            $length = $this->subscriptionLengthChecker->checkSubscriptionLength($order);
+            $date = (new \DateTime())->modify('+' . $length . ' months');
             $shippingSubscription->setExpiresAt($date);
             $shippingSubscription->enable();
         }
@@ -72,9 +85,12 @@ final class OrderShippingSubscriptionOperator
 
     public function disable(OrderInterface $order): void
     {
+        if (null === $order->getId()) {
+            return;
+        }
         $shippingSubscriptions = $this->shippingSubscriptionRepository->findSubscriptionsByOrder($order);
 
-        if (count($shippingSubscriptions) === 0) {
+        if (0 === count($shippingSubscriptions)) {
             return;
         }
 
