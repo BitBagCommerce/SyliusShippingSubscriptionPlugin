@@ -9,7 +9,7 @@ use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
 
 class ProductVariant extends BaseProductVariant implements ProductVariantInterface
 {
-    /** @var int */
+    /** @var int|null */
     protected $subscriptionLength;
 
     public function getSubscriptionLength(): ?int
