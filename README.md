@@ -1,4 +1,4 @@
-# [![](https://bitbag.io/wp-content/uploads/2021/07/shipping-subscrtiption.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_shipping_subscription)
+# [![](https://bitbag.io/wp-content/uploads/2021/07/shipping-subscription.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_shipping_subscription)
 
 # BitBag SyliusShippingSubscriptionPlugin
 ----
