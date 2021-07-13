@@ -1,3 +1,5 @@
+# [![](https://bitbag.io/wp-content/uploads/2021/07/shipping-subscrtiption.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_shipping_subscription)
+
 # BitBag SyliusShippingSubscriptionPlugin
 ----
 <p>
@@ -668,4 +670,5 @@ This plugin's source code is completely free and released under the terms of the
 ---
 If you want to contact us, the best way is to fill the form on [our website](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_wishlist) or send us an e-mail to hello@bitbag.io with your question(s). We guarantee that we answer as soon as we can!
 
-[![](https://bitbag.io/wp-content/uploads/2020/10/footer.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_wishlist)
+[![](https://bitbag.io/wp-content/uploads/2020/10/footer.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_shipping_subscription)
+
