@@ -33,6 +33,10 @@ final class SubscriptionExpirationChecker implements SubscriptionExpirationCheck
      */
     public function checkSubscription(SubscriptionAwareInterface $customer): bool
     {
+        if (null === $customer->getId()) {
+            return false;
+        }
+
         $subscription = $this->customerRepository->findActiveSubscription($customer);
 
         return $subscription instanceof ShippingSubscriptionInterface;
