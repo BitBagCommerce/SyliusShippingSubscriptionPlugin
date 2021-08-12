@@ -36,16 +36,6 @@ final class ShippingSubscriptionEligibilityCheckerSpec extends ObjectBehavior
         $this->isSubscriptionActive($shippingSubject, $shippingMethod)->shouldReturn(false);
     }
 
-    function it_should_not_support_empty_customer(
-        ShipmentInterface $shippingSubject,
-        ShippingSubscriptionMethodInterface $shippingMethod,
-        OrderInterface $order
-    )
-    {
-        $shippingSubject->getOrder()->willReturn($order);
-        $this->isSubscriptionActive($shippingSubject, $shippingMethod)->shouldReturn(false);
-    }
-
     function it_should_not_display_shipping_method_without_subscription(
         ShipmentInterface $shippingSubject,
         ShippingSubscriptionMethodInterface $shippingMethod,
