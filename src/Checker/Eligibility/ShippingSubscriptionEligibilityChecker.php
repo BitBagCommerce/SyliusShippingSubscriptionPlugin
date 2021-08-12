@@ -40,6 +40,10 @@ final class ShippingSubscriptionEligibilityChecker implements ShippingMethodElig
             return false;
         }
 
+        if($shippingMethod->isShippingSubscription() !== true){
+            return true;
+        }
+        
         /** @var OrderInterface $order */
         $order = $shippingSubject->getOrder();
 
