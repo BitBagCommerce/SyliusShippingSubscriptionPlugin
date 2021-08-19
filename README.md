@@ -2,9 +2,6 @@
 
 # BitBag SyliusShippingSubscriptionPlugin
 ----
-<p>
- <img align="left" src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
-</p> 
 
 At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us to work  together, feel free to reach out. You will find out more about our professional services, technologies, and contact details at [https://bitbag.io/](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_shipping_subscription).
 
@@ -23,7 +20,6 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 * [About us](#about-us)
    * [Community](#community)
 * [Demo](#demo-sylius-shop)
-* [Additional Sylius resources for developers](#additional-resources-for-developers)
 * [License](#license)
 * [Contact](#contact)
 
@@ -523,7 +519,7 @@ winzou_state_machine:
             after:
                 bitbag_order_cancellation_shipping_subscription:
                     on: [ "cancel" ]
-                    do: [ "@bitbag_sylius_shipping_subscritption.operator.shipping_subscription", "disable" ]
+                    do: [ "@bitbag_sylius_shipping_subscription.operator.shipping_subscription", "disable" ]
                     args: [ "object" ]
 
     sylius_order_checkout:
