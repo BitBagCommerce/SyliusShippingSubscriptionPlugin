@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
 class ShippingSubscription implements ShippingSubscriptionInterface
 {
     use TimestampableTrait;
+
     use ToggleableTrait;
 
     /** @var int */

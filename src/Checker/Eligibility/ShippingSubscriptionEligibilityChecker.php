@@ -46,7 +46,7 @@ final class ShippingSubscriptionEligibilityChecker implements ShippingMethodElig
             return false;
         }
 
-        if($shippingMethod->isShippingSubscription() !== true){
+        if (true !== $shippingMethod->isShippingSubscription()) {
             return true;
         }
 
