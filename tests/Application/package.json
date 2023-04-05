@@ -9,7 +9,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.28.0",
+    "@symfony/webpack-encore": "^1.6.1",
     "babel-core": "^6.26.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -44,8 +44,8 @@
     "yargs": "^6.4.0"
   },
   "scripts": {
-    "build": "gulp build",
-    "gulp": "gulp build",
+    "build": "encore production",
+    "dev": "encore dev",
     "lint": "yarn lint:js",
     "lint:js": "eslint gulpfile.babel.js"
   },
