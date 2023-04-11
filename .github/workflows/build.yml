@@ -2,6 +2,7 @@ name: Build
 
 on:
     push: ~
+    pull_request: ~
     release:
         types: [created]
     schedule:
@@ -10,15 +11,16 @@ on:
 
 jobs:
     tests:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
 
         name: "Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, MySQL ${{ matrix.mysql }}"
 
         strategy:
             fail-fast: false
             matrix:
-                php: [7.4, 8.0]
-                sylius: [~1.9.0, ~1.10.0, ~1.11.0]
+                php: [8.0]
+                symfony: [^5.4, ^6.0]
+                sylius: [~1.11.0, ~1.12.0]
                 node: [14.x]
                 mysql: [5.7, 8.0]
 
@@ -28,7 +30,7 @@ jobs:
                         mysql: 5.7
                     -
                         sylius: ~1.11.0
-                        php: 7.4
+                        symfony: ^6.0
 
         env:
             APP_ENV: test
@@ -124,7 +126,7 @@ jobs:
                 name: Prepare test application assets
                 run: |
                     (cd tests/Application && bin/console assets:install public -vvv)
-                    (cd tests/Application && yarn build)
+                    (cd tests/Application && yarn encore dev)
             -
                 name: Prepare test application cache
                 run: (cd tests/Application && bin/console cache:warmup -vvv)
