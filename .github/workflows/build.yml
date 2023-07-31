@@ -11,7 +11,7 @@ on:
 
 jobs:
     tests:
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
 
         name: "Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, MySQL ${{ matrix.mysql }}"
 
@@ -149,3 +149,16 @@ jobs:
             -
                 name: Run PHPSpec
                 run: vendor/bin/phpspec run --ansi -f progress --no-interaction
+                
+            - 
+                name: Failed build Slack notification
+                uses: rtCamp/action-slack-notify@v2
+                if: ${{ failure() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
+                env:
+                    SLACK_CHANNEL: ${{ secrets.FAILED_BUILD_SLACK_CHANNEL }}
+                    SLACK_COLOR: ${{ job.status }}
+                    SLACK_ICON: https://github.com/rtCamp.png?size=48
+                    SLACK_MESSAGE: ':x:'
+                    SLACK_TITLE: Failed build on ${{ github.event.repository.name }} repository
+                    SLACK_USERNAME: ${{ secrets.FAILED_BUILD_SLACK_USERNAME }}
+                    SLACK_WEBHOOK: ${{ secrets.FAILED_BUILD_SLACK_WEBHOOK }}
