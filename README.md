@@ -74,7 +74,9 @@ bitbag_sylius_shipping_subscription_plugin:
     resource: "@BitBagSyliusShippingSubscriptionPlugin/Resources/config/routing.yml"
 ```
 
+
 Extend `Product`(including Doctrine mapping):
+If you want to extend entities via attribute mapping, see here: [Attributes](doc/attributes_mapping.md)
 
 ```php
 <?php 
@@ -346,7 +348,7 @@ Override forms by creating `templates/bundles/SyliusAdminBundle/Product/Tab/_det
                     {% if product.simple %}
                         {{ form_row(form.variant.shippingRequired) }}
                     {% else %}
-                        {{ form_row(form.options) }}
+                        {{ form_row(form.options, {'remote_url': path('sylius_admin_ajax_product_options_by_phrase'), 'load_edit_url': path('sylius_admin_ajax_find_product_options')}) }}
                         {{ form_row(form.variantSelectionMethod) }}
                     {% endif %}
 
