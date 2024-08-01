@@ -480,8 +480,6 @@ Override forms by creating `templates/bundles/SyliusAdminBundle/Product/Tab/_det
             <div class="two fields">
                 {{ form_row(form.shippingCategory) }}
             </div>
-            {{form_label(form.channelPricings)}}
-            {% include "@SyliusAdmin/Product/_channel_pricing.html.twig" with { product: product_variant.product, variantForm: form } only %}
         </div>
         <div class="ui segment">
             <div class="one field">
