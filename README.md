@@ -12,6 +12,7 @@ Like what we do? Want to join us? Check out our job listings on our [career page
 ***
 
 * [Overview](#overview)
+* [Functionalities](doc/functionalities.md)
 * [Support](#we-are-here-to-help)
 * [Installation](#installation)
    * [Usage](#usage)
