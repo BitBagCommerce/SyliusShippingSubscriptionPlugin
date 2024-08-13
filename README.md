@@ -458,9 +458,9 @@ Override forms by creating `templates/bundles/SyliusAdminBundle/Product/Tab/_det
 </div>   
 ```
 
-  `templates/bundles/SyliusAdminBundle/Product/ProductVariant/Tab/_details.html.twig`
+  `templates/bundles/SyliusAdminBundle/ProductVariant/Tab/_details.html.twig`
 
-  **Note.** Depending on your Sylius version, it may be `templates/bundles/SyliusAdminBundle/ProductVariant/Tab/_details.html.twig` file path. Please check the path in your vendor directory.
+  **Note.** Depending on your Sylius version, it may be `templates/bundles/SyliusAdminBundle/Product/ProductVariant/Tab/_details.html.twig` file path. Please check the path in your vendor directory.
 
 ```twig
 {% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
