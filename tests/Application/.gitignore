@@ -1,6 +1,7 @@
 /public/assets
 /public/css
 /public/js
+/public/build/*
 /public/media/*
 !/public/media/image/
 /public/media/image/*

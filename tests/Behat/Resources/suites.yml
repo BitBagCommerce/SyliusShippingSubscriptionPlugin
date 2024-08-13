@@ -4,7 +4,7 @@ default:
     suites:
         greeting_customer:
             contexts:
-                - acme_sylius_example.context.ui.shop.welcome
+                - bitbag_sylius_shipping_subscription_plugin.context.ui.shop.welcome
 
             filters:
                 tags: "@greeting_customer"

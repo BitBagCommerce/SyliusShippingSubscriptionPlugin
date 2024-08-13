@@ -1,10 +1,17 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
+ */
+
 declare(strict_types=1);
 
 use Symfony\Component\Dotenv\Dotenv;
 
-require dirname(__DIR__).'../../../vendor/autoload.php';
+require dirname(__DIR__) . '../../../vendor/autoload.php';
 
 // Load cached env vars if the .env.local.php file exists
 // Run "composer dump-env prod" to create it (requires symfony/flex >=1.2)
